@@ -1,0 +1,3 @@
+image: sachinkuthe/akstestwebapi:1.0.0
+replicas: 1
+port: 80

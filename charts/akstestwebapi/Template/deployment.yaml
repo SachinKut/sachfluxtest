@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: akstestwebapi-deployment
+  labels:
+    app: akstestwebapi
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: akstestwebapi
+  template:
+    metadata:
+      labels:
+        app: akstestwebapi
+    spec:
+      containers:
+      - name: akstestwebapi
+        image: "{{ .Values.image }}"
+        ports:
+        - containerPort: {{ .Values.port }}
+      imagePullSecrets:
+      - name: regcred  
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: akstestwebapi-service
+spec:
+  selector:
+    app: akstestwebapi
+  ports:
+  - name: http
+    port: 80
+    targetPort: 80
+  type: LoadBalancer

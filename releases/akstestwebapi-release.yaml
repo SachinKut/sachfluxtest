@@ -1,0 +1,16 @@
+apiVersion: flux.weave.works/v1beta1
+kind: HelmRelease
+metadata:
+  name: akstestwebapi-default
+  namespace: default
+  annotations:
+    flux.weave.works/automated: "true"
+    flux.weave.works/tag.chart-image: glob:1.0.*
+spec:
+  chart:
+    git: git@bitbucket.org/Sachinkut/fluxtest.git
+    path: charts/akstestwebapi
+  releaseName: akstestwebapi-default
+  values:
+    image: sachinkuthe/akstestwebapi:1.0.0
+    
